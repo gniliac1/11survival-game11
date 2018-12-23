@@ -4,11 +4,9 @@
 #include<iostream>
 #include<memory>
 
-// sfml header
-#include<SFML/Graphics.hpp>
-
 // own header files
 #include "UserTypes.h"
+#include "Animation.h"
 
 class Player
 {
@@ -22,6 +20,7 @@ public:
 
 private:
 
+	Animation *_animation;
 	std::unique_ptr<sf::Texture> _texture;
 	std::shared_ptr<sf::Sprite> _sprite;
 };
