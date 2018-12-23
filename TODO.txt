@@ -1,0 +1,6 @@
+Ziel:
+Nicht verhungern durch Lebensmittel sammeln
+- Durch die Welt laufen (richtige Animationen)
+- Interaktion mit Objekten
+- Eine Map
+- Eine Statusleiste
