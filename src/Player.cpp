@@ -4,7 +4,9 @@
 
 Player::Player()
 	: _texture(std::make_unique<sf::Texture>()),
-	_sprite(std::make_shared<sf::Sprite>())
+	_sprite(std::make_shared<sf::Sprite>()),
+	_lastMovement(0.0f,0.0f),
+	_velocity(2.5f)
 {
 	if (!_texture->loadFromFile("../graphics/sprites/people/male_walkcycle.png"))
 	{
@@ -29,28 +31,36 @@ void Player::move()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		// left key is pressed: move our character relative to the current position
-		_sprite->move(sf::Vector2f(-2.5, 0.f));
+		_lastMovement = _velocity * sf::Vector2f(-1.f, 0.f);
+		_sprite->move(_lastMovement);
 		_animation->moveSprite(sf::Keyboard::Left, _sprite);
-
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		// right key is pressed: move our character relative to the current position
-		_sprite->move(sf::Vector2f(2.5, 0.f)); 
+		_lastMovement = _velocity * sf::Vector2f(1.f, 0.f);
+		_sprite->move(_lastMovement);
 		_animation->moveSprite(sf::Keyboard::Right, _sprite);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		// up key is pressed: move our character relative to the current position
-		_sprite->move(sf::Vector2f(0.f, -2.5)); 
+		_lastMovement = _velocity * sf::Vector2f(0.f, -1.f);
+		_sprite->move(_lastMovement);
 		_animation->moveSprite(sf::Keyboard::Up, _sprite);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		// left key is pressed: move our character relative to the current position
-		_sprite->move(sf::Vector2f(0.f, 2.5)); 
+		_lastMovement = _velocity * sf::Vector2f(0.f, 1.f);
+		_sprite->move(_lastMovement);
 		_animation->moveSprite(sf::Keyboard::Down, _sprite);
 	}
+}
+
+void Player::resetLastMove() 
+{
+	_sprite->move(-1.f*_lastMovement);
 }
 
 std::shared_ptr<sf::Sprite> Player::getSprite()

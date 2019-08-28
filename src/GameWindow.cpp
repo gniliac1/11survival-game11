@@ -55,6 +55,29 @@ void GameWindow::manageEvents()
 void GameWindow::logic()
 {
 	_player->move();
+	check_collisions();
+}
+
+void GameWindow::check_collisions()
+{
+	// get current size of the window
+	sf::Vector2u windowSize = _window->getSize();
+	sf::FloatRect screen(0.0,0.0,windowSize.x,windowSize.y);
+	// update the quad tree
+	_map->updateQuadTree(screen);
+	// query the quad tree with the bounding box of the player
+	std::vector<tmx::MapObject*> objects = _map->queryQuadTree(_player->getSprite()->getGlobalBounds());
+	//std::cerr << "Collision objects: " << objects.size() << std::endl;
+	bool collision = false;
+	for (const tmx::MapObject* object : objects)
+	{
+		collision = collision || object->getAABB().intersects(_player->getSprite()->getGlobalBounds());
+	}
+	// check for collisions
+	if (collision) {
+		// collision, so reset the player movement
+		_player->resetLastMove();
+	}
 }
 
 void GameWindow::render()

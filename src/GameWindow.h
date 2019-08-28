@@ -42,6 +42,9 @@ private:
 	// move objects and check collisions
 	void logic();
 
+	// check collisions
+	void check_collisions();
+
 	// perform graphic specific operations
 	void render();
 
