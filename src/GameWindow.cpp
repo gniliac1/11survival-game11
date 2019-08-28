@@ -11,7 +11,7 @@ GameWindow::GameWindow(size_t width, size_t height, cdouble frameRate, cstring w
 	_window->setFramerateLimit(frameRate);
 
 	// load the map
-	_map->load("smallMap.tmx");
+	_map->load("markt.tmx");
 }
 
 GameWindow::~GameWindow()

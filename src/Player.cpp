@@ -16,7 +16,7 @@ Player::Player()
 	_sprite->setTexture(*_texture);
 
 	// set the player to an absolute initial position on the screen
-	_sprite->setPosition(sf::Vector2f(480.f, 270.f));
+	_sprite->setPosition(sf::Vector2f(1800.f, 500.f));
 	// choose the right ractangle of the sprite sheet
 	_sprite->setTextureRect(_animation->getRectOfSprite());
 }
