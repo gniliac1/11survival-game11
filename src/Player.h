@@ -16,6 +16,8 @@ public:
 
 	void move();
 	void resetLastMove();
+	//Returns the global bounding box for the human. Not for the whole sprite.
+	sf::FloatRect getBoundingBox(); 
 
 	std::shared_ptr<sf::Sprite> getSprite();
 

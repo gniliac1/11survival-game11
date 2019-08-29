@@ -66,17 +66,22 @@ void GameWindow::check_collisions()
 	// update the quad tree
 	_map->updateQuadTree(screen);
 	// query the quad tree with the bounding box of the player
-	std::vector<tmx::MapObject*> objects = _map->queryQuadTree(_player->getSprite()->getGlobalBounds());
+	std::vector<tmx::MapObject*> objects = _map->queryQuadTree(_player->getBoundingBox());
 	//std::cerr << "Collision objects: " << objects.size() << std::endl;
 	bool collision = false;
+	tmx::MapObject* collisionObject;
 	for (const tmx::MapObject* object : objects)
 	{
-		collision = collision || object->getAABB().intersects(_player->getSprite()->getGlobalBounds());
-	}
-	// check for collisions
-	if (collision) {
-		// collision, so reset the player movement
-		_player->resetLastMove();
+		if (object->getAABB().intersects(_player->getBoundingBox()))
+		{
+			if (object->getParent() == "market")
+			{
+				std::cout << object->getName() << std::endl;
+			}
+			_player->resetLastMove();
+			
+			break;
+		}
 	}
 }
 

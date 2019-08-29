@@ -63,6 +63,16 @@ void Player::resetLastMove()
 	_sprite->move(-1.f*_lastMovement);
 }
 
+sf::FloatRect  Player::getBoundingBox()
+{
+	sf::FloatRect boundingBox = _sprite->getGlobalBounds();
+	boundingBox.width = 24;
+	boundingBox.height = 24;
+	boundingBox.top += 40;
+	boundingBox.left += 20;
+	return boundingBox;
+}
+
 std::shared_ptr<sf::Sprite> Player::getSprite()
 {
 	return _sprite;
