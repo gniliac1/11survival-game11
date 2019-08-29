@@ -10,6 +10,9 @@ GameWindow::GameWindow(size_t width, size_t height, cdouble frameRate, cstring w
 	// window options
 	_window->setFramerateLimit(frameRate);
 
+	// load the font for printing status messages
+	_statusFont.loadFromFile("arial.ttf");
+
 	// load the map
 	_map->load("markt.tmx");
 }
@@ -23,11 +26,22 @@ void GameWindow::run()
 	// main loop
 	while (_window->isOpen())
 	{
+		if (_clock.getElapsedTime().asSeconds() > 5.f)
+		{
+			if (_statusMessages.size() > 0)
+			{
+				_statusMessages.pop_front();
+			}
+			_clock.restart();
+		}
+
 		manageEvents();
 
 		logic();
 
 		render();
+
+		_interactionRequest = false;
 	}
 }
 
@@ -48,6 +62,16 @@ void GameWindow::manageEvents()
 		if (event.type == sf::Event::Closed)
 		{
 			_window->close();
+		}
+
+		// buy items
+		if (event.type == sf::Event::KeyReleased)
+		{
+			if (event.key.code == sf::Keyboard::Space) {
+				_interactionRequest = true;
+				std::cerr << "You've issued an interaction ..." << std::endl;
+				addStatusMessage("You've issued an interaction ...");
+			}
 		}
 	}
 }
@@ -70,6 +94,7 @@ void GameWindow::check_collisions()
 	//std::cerr << "Collision objects: " << objects.size() << std::endl;
 	bool collision = false;
 	tmx::MapObject* collisionObject;
+	// iterate over all objects in the map
 	for (const tmx::MapObject* object : objects)
 	{
 		if (object->getAABB().intersects(_player->getBoundingBox()))
@@ -77,12 +102,11 @@ void GameWindow::check_collisions()
 			if (object->getParent() == "market")
 			{
 				_objectLabel = object->getName();
-			/*	sf::Text text;
-				text.setString(object->getName());
-				text.setPosition(_player->getSprite()->getGlobalBounds().left, _player->getSprite()->getGlobalBounds().top);
-				text.setCharacterSize(24);
-				text.setFillColor(sf::Color::Black);
-				_window->draw(text); */
+				if (_interactionRequest)
+				{
+					std::cerr << "Congrats, you bought an item!" << std::endl;
+					addStatusMessage("Congrats, you bought an item!");
+				}
 			}
 			else
 			{
@@ -107,16 +131,16 @@ void GameWindow::render()
 		_objectLabel = "0";
 	}
 
+	showStatusMessages();
+
 	_window->display();
 }
 
 void GameWindow::showObjectLabel(std::string label)
 {
 	sf::Text text;
-	sf::Font font;
 
-	font.loadFromFile("arial.ttf");
-	text.setFont(font);
+	text.setFont(_statusFont);
 	text.setString(label);
 	text.setPosition(_player->getSprite()->getGlobalBounds().left, _player->getSprite()->getGlobalBounds().top);
 	text.setCharacterSize(12);
@@ -124,4 +148,24 @@ void GameWindow::showObjectLabel(std::string label)
 	//text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
 	_window->draw(text);
+}
+
+void GameWindow::addStatusMessage(std::string message)
+{
+	sf::Text statusMessage;
+	statusMessage.setFont(_statusFont);
+	statusMessage.setString(message);
+	statusMessage.setCharacterSize(15);
+	statusMessage.setFillColor(sf::Color::Black);
+	statusMessage.setStyle(sf::Text::Bold);
+	_statusMessages.push_back(statusMessage);
+}
+
+void GameWindow::showStatusMessages()
+{
+	for (size_t i=0; i<_statusMessages.size(); ++i)
+	{
+		_statusMessages[i].setPosition(50, 50 + i * 25);
+		_window->draw(_statusMessages[i]);
+	}
 }

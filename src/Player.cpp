@@ -8,7 +8,7 @@ Player::Player()
 	_lastMovement(0.0f,0.0f),
 	_velocity(2.5f)
 {
-	if (!_texture->loadFromFile("../graphics/sprites/people/male_walkcycle.png"))
+	if (!_texture->loadFromFile("../graphics/sprites/people/soldier.png"))
 	{
 		std::cerr << "Alles kaputt! :(" << std::endl;
 	}

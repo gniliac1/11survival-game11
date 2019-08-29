@@ -6,7 +6,7 @@
 class Animation
 {
 public:
-	Animation(sf::IntRect rect = sf::IntRect(0, 0, 64, 64));
+	Animation(sf::IntRect rect = sf::IntRect(0, 129, 64, 64));
 	~Animation();
 
 	sf::IntRect moveSprite(int pressedKey);
