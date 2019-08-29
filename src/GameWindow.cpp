@@ -69,7 +69,6 @@ void GameWindow::manageEvents()
 		{
 			if (event.key.code == sf::Keyboard::Space) {
 				_interactionRequest = true;
-				std::cerr << "You've issued an interaction ..." << std::endl;
 				addStatusMessage("You've issued an interaction ...");
 			}
 		}
@@ -104,8 +103,15 @@ void GameWindow::check_collisions()
 				_objectLabel = object->getName();
 				if (_interactionRequest)
 				{
-					std::cerr << "Congrats, you bought an item!" << std::endl;
 					addStatusMessage("Congrats, you bought an item!");
+				}
+			}
+			else if (object->getParent() == "NPC" || object->getParent() == "NPC2")
+			{
+				_objectLabel = object->getName();
+				if (_interactionRequest)
+				{
+					addStatusMessage(std::string("Hello adventurer! My name is ") + object->getName() + std::string(". Nice to meet you."));
 				}
 			}
 			else
@@ -145,7 +151,7 @@ void GameWindow::showObjectLabel(std::string label)
 	text.setPosition(_player->getSprite()->getGlobalBounds().left, _player->getSprite()->getGlobalBounds().top);
 	text.setCharacterSize(12);
 	text.setFillColor(sf::Color::Black);
-	//text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	text.setStyle(sf::Text::Bold);
 
 	_window->draw(text);
 }
