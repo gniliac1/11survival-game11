@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-up" width="60" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="98">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-up" width="60" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="99">
  <tileset firstgid="1" source="dirt.tsx"/>
  <tileset firstgid="19" source="dirt2.tsx"/>
  <tileset firstgid="37" source="grass.tsx"/>
@@ -189,13 +189,13 @@
 </data>
  </layer>
  <objectgroup id="13" name="WaterAndWalls">
-  <object id="21" x="576" y="567" width="286" height="68"/>
-  <object id="22" x="928" y="344.333" width="288" height="64.6667"/>
-  <object id="23" x="800.667" y="87.6667" width="287.333" height="83.3333"/>
-  <object id="31" x="1434" y="250" width="135.333" height="70.6667"/>
+  <object id="21" x="576" y="567" width="286" height="80"/>
+  <object id="22" x="928" y="344.333" width="288" height="79.6667"/>
+  <object id="23" x="800.667" y="87.6667" width="287.333" height="72.3333"/>
+  <object id="31" x="1434" y="250" width="135.333" height="86.6667"/>
   <object id="32" x="1434" y="319.333" width="37.3333" height="26.6667"/>
   <object id="33" x="1536.67" y="319.333" width="29.3333" height="32"/>
-  <object id="36" x="1638" y="187.333" width="113.333" height="68"/>
+  <object id="36" x="1638" y="187.333" width="113.333" height="87.3333"/>
   <object id="37" x="1722" y="255.333" width="29.3333" height="26.6667"/>
   <object id="41" x="1447.33" y="873.667" width="371.333" height="56"/>
   <object id="45" x="-1" y="843" width="530" height="180"/>
@@ -221,15 +221,16 @@
   <object id="95" x="-0.666667" y="554.667" width="246.667" height="165.333"/>
   <object id="96" x="230" y="584" width="49.3333" height="48"/>
   <object id="97" x="234" y="616" width="76" height="70.6667"/>
+  <object id="98" x="833.5" y="160" width="222" height="41"/>
  </objectgroup>
  <objectgroup id="14" name="market">
   <object id="24" x="767.5" y="128.5" width="32" height="90"/>
-  <object id="25" name="Gemüsetheke" x="833.5" y="170.833" width="223.667" height="26.6666"/>
+  <object id="25" name="Vegetables" x="831.5" y="177.833" width="223.667" height="38.6666"/>
   <object id="26" x="1087.5" y="128.5" width="32" height="88"/>
-  <object id="28" name="Fleischtheke" x="928.5" y="412.5" width="286" height="12"/>
-  <object id="29" name="Fischtheke" x="576" y="637.5" width="287" height="10"/>
-  <object id="38" name="Gebrauchtwarenhändler" x="1663.34" y="255.333" width="57.3333" height="29.3333"/>
-  <object id="39" name="Warenhändler" x="1472.67" y="320" width="62.6667" height="25.3333"/>
+  <object id="28" name="Meat" x="937.5" y="392.5" width="269" height="53"/>
+  <object id="29" name="Fish" x="581.333" y="616.5" width="276" height="55"/>
+  <object id="38" name="Second hand market" x="1663.34" y="267.333" width="58.6666" height="30.6666"/>
+  <object id="39" name="Warehouse" x="1472.67" y="332" width="62.6667" height="25.3333"/>
   <object id="91" x="1632.67" y="256" width="29.3333" height="30.6667"/>
  </objectgroup>
  <layer id="6" name="Hafen" width="60" height="32">

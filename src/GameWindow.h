@@ -27,6 +27,8 @@ public:
 
 private:
 
+	std::string _objectLabel;
+
 	// pointer to the map instance
 	std::unique_ptr<tmx::MapLoader> _map;
 
@@ -47,6 +49,9 @@ private:
 
 	// perform graphic specific operations
 	void render();
+
+	// Shows a label above the charakter to label the object in front of him
+	void showObjectLabel(std::string label);
 
 };
 

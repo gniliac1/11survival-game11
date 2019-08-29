@@ -76,11 +76,19 @@ void GameWindow::check_collisions()
 		{
 			if (object->getParent() == "market")
 			{
-				std::cout << object->getName() << std::endl;
+				_objectLabel = object->getName();
+			/*	sf::Text text;
+				text.setString(object->getName());
+				text.setPosition(_player->getSprite()->getGlobalBounds().left, _player->getSprite()->getGlobalBounds().top);
+				text.setCharacterSize(24);
+				text.setFillColor(sf::Color::Black);
+				_window->draw(text); */
 			}
-			_player->resetLastMove();
-			
-			break;
+			else
+			{
+				_player->resetLastMove();
+				break;
+			}
 		}
 	}
 }
@@ -93,5 +101,27 @@ void GameWindow::render()
 	_window->draw( *_map ); // map
 	_window->draw( *_player->getSprite() ); // player
 
+	if (_objectLabel != "0")
+	{
+		showObjectLabel(_objectLabel);
+		_objectLabel = "0";
+	}
+
 	_window->display();
+}
+
+void GameWindow::showObjectLabel(std::string label)
+{
+	sf::Text text;
+	sf::Font font;
+
+	font.loadFromFile("arial.ttf");
+	text.setFont(font);
+	text.setString(label);
+	text.setPosition(_player->getSprite()->getGlobalBounds().left, _player->getSprite()->getGlobalBounds().top);
+	text.setCharacterSize(12);
+	text.setFillColor(sf::Color::Black);
+	//text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+	_window->draw(text);
 }
