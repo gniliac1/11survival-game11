@@ -20,3 +20,13 @@ https://opengameart.org/content/lpc-zombie
 
 Helme:
 https://opengameart.org/content/lpc-helmets
+
+Magecity:
+https://opengameart.org/content/mage-city-arcanos
+
+Atlas:
+https://opengameart.org/content/lpc-tile-atlas
+https://opengameart.org/content/lpc-tile-atlas2
+
+Gui Construction:
+https://opengameart.org/content/rpg-gui-construction-kit-v10
