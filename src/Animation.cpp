@@ -1,6 +1,17 @@
 #include "pch.h"
 #include "Animation.h"
 
+Animation::Animation(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfAnimationForSprite, sf::IntRect rectOfTextureForAnimation = sf::IntRect())
+	: Image(textureFileName,hitBox,position,rectOfTextureForAnimation)
+{
+	
+	// for Animation instances, the size of the texture is mostly larger than the size of the sprite
+	_sprite->setTextureRect(rectOfAnimationForSprite);
+
+	// set the position of the Animation to a fixed position on screen
+	_sprite->setPosition(position);
+}
+
 Animation::Animation(sf::IntRect rect) :
 	_rectOfSprite(rect)
 {
@@ -56,4 +67,9 @@ void Animation::moveSprite(int pressedKey, std::shared_ptr<sf::Sprite> sprite)
 sf::IntRect Animation::getRectOfSprite()
 {
 	return _rectOfSprite;
+}
+
+void Animation::setPosition(const sf::Vector2f & position)
+{
+	_sprite->setPosition(position);
 }

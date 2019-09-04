@@ -14,7 +14,7 @@ public:
 	Image(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfTextureForSprite = sf::IntRect());
 	virtual ~Image();
 
-private: 
+protected: 
 
 	// Charakter hat Hitbox von 24x24 mit top=40 und left=20
 	sf::IntRect _hitBox;
