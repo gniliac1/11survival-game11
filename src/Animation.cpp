@@ -1,16 +1,16 @@
 #include "pch.h"
 #include "Animation.h"
 
-Animation::Animation(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfAnimationForSprite, sf::IntRect rectOfTextureForAnimation = sf::IntRect())
-	: Image(textureFileName,hitBox,position,rectOfTextureForAnimation)
-{
-	
-	// for Animation instances, the size of the texture is mostly larger than the size of the sprite
-	_sprite->setTextureRect(rectOfAnimationForSprite);
-
-	// set the position of the Animation to a fixed position on screen
-	_sprite->setPosition(position);
-}
+//Animation::Animation(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfAnimationForSprite, sf::IntRect rectOfTextureForAnimation = sf::IntRect())
+//	: Image(textureFileName,hitBox,position,rectOfTextureForAnimation)
+//{
+//	
+//	// for Animation instances, the size of the texture is mostly larger than the size of the sprite
+//	_sprite->setTextureRect(rectOfAnimationForSprite);
+//
+//	// set the position of the Animation to a fixed position on screen
+//	_sprite->setPosition(position);
+//}
 
 Animation::Animation(sf::IntRect rect) :
 	_rectOfSprite(rect)
@@ -36,26 +36,32 @@ sf::IntRect Animation::moveSprite(int pressedKey)
 	{
 		case sf::Keyboard::Up:
 		{
-			_rectOfSprite.top = 0; // 0 * 64
+			_rectOfSprite.top = 512; // 8 * 64
 			break;
 		}
 		case sf::Keyboard::Left:
 		{
-			_rectOfSprite.top = 64; // 1 * 64
+			_rectOfSprite.top = 576; // 9 * 64
 			break;
 		}
 		case sf::Keyboard::Down:
 		{
-			_rectOfSprite.top = 128; // 2 * 64
+			_rectOfSprite.top = 640; // 10 * 64
 			break;
 		}
 		case sf::Keyboard::Right:
 		{
-			_rectOfSprite.top = 192; // 3 * 64
+			_rectOfSprite.top = 704; // 11 * 64
 			break;
 		}
 	}
 	return _rectOfSprite;
+}
+
+void Animation::reset(std::shared_ptr<sf::Sprite> sprite)
+{
+	_rectOfSprite.left = 0;
+	sprite->setTextureRect(_rectOfSprite);
 }
 
 void Animation::moveSprite(int pressedKey, std::shared_ptr<sf::Sprite> sprite)
@@ -69,7 +75,7 @@ sf::IntRect Animation::getRectOfSprite()
 	return _rectOfSprite;
 }
 
-void Animation::setPosition(const sf::Vector2f & position)
-{
-	_sprite->setPosition(position);
-}
+//void Animation::setPosition(const sf::Vector2f & position)
+//{
+//	_sprite->setPosition(position);
+//}

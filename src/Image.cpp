@@ -2,7 +2,7 @@
 #include "Image.h"
 
 
-Image::Image(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfTextureForSprite=sf::IntRect())
+Image::Image(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfTextureForSprite)
 	: _hitBox(hitBox),
 	_sprite(std::make_shared<sf::Sprite>()),
 	_texture(std::make_unique<sf::Texture>())

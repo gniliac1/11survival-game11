@@ -8,7 +8,7 @@ Player::Player()
 	_lastMovement(0.0f,0.0f),
 	_velocity(2.5f)
 {
-	if (!_texture->loadFromFile("../graphics/sprites/people/soldier.png"))
+	if (!_texture->loadFromFile("../graphics/characters/sander.png"))
 	{
 		std::cerr << "Alles kaputt! :(" << std::endl;
 	}
@@ -55,6 +55,9 @@ void Player::move()
 		_lastMovement = _velocity * sf::Vector2f(0.f, 1.f);
 		_sprite->move(_lastMovement);
 		_animation->moveSprite(sf::Keyboard::Down, _sprite);
+	}
+	else {
+		_animation->reset(_sprite);
 	}
 }
 
