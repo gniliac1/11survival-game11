@@ -10,7 +10,7 @@ class Animation /*: public Image*/
 {
 public:
 
-	//Animation(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfAnimationForSprite, sf::IntRect rectOfTextureForAnimation = sf::IntRect());
+	//Animation(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfAnimationForSprite, sf::IntRect rectOfTextureForAnimation);
 	Animation(sf::IntRect rect = sf::IntRect(0, 640, 64, 64)); // old, 640 = 10*64
 	~Animation(); // old
 
