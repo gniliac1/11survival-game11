@@ -148,7 +148,7 @@ void GameWindow::showObjectLabel(std::string label)
 
 	text.setFont(_statusFont);
 	text.setString(label);
-	text.setPosition(_player->getSprite()->getGlobalBounds().left, _player->getSprite()->getGlobalBounds().top);
+	text.setPosition(_player->getBoundingBox().left -20. , _player->getBoundingBox().top - 50.);
 	text.setCharacterSize(12);
 	text.setFillColor(sf::Color::Black);
 	text.setStyle(sf::Text::Bold);
