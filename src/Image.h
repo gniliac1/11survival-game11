@@ -18,8 +18,8 @@ protected:
 
 	// Charakter hat Hitbox von 24x24 mit top=40 und left=20
 	sf::IntRect _hitBox;
-	std::shared_ptr<sf::Sprite> _sprite;
-	std::unique_ptr<sf::Texture> _texture;
+	std::shared_ptr<sf::Sprite> _sprite;	// Bild des (animierten) Objektes. Besitzt eine Position.
+	std::unique_ptr<sf::Texture> _texture;	// Menge aber Bilder, quasi das "Spritesheet" bzw. ein Teil vom Spritesheet.
 
 public: 
 
@@ -27,6 +27,6 @@ public:
 	sf::Vector2f getPosition() const;
 	std::shared_ptr<sf::Sprite> getSprite() const;
 
-	/*void setPosition(const sf::Vector2f& position);*/
+	//void setPosition(const sf::Vector2f& position);
 };
 

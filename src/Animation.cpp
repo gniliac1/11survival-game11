@@ -1,81 +1,69 @@
 #include "pch.h"
 #include "Animation.h"
 
-//Animation::Animation(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::IntRect rectOfAnimationForSprite, sf::IntRect rectOfTextureForAnimation = sf::IntRect())
-//	: Image(textureFileName,hitBox,position,rectOfTextureForAnimation)
-//{
-//	
-//	// for Animation instances, the size of the texture is mostly larger than the size of the sprite
-//	_sprite->setTextureRect(rectOfAnimationForSprite);
-//
-//	// set the position of the Animation to a fixed position on screen
-//	_sprite->setPosition(position);
-//}
-
-Animation::Animation(sf::IntRect rect) :
-	_rectOfSprite(rect)
+Animation::Animation(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::Vector2i tileSize, int nTilesPerDirection, sf::IntRect rectOfTextureForAnimation)
+	: Image(textureFileName, hitBox, position, rectOfTextureForAnimation),
+	_tileSize(tileSize),
+	_nTilesPerDirection(nTilesPerDirection)
 {
-
+	_rectOfSpriteInTexture = sf::IntRect(0,0,tileSize.x, tileSize.y);
+	_sprite->setTextureRect(_rectOfSpriteInTexture);
+	_spriteVelocity = 2.5f;
 }
 
 Animation::~Animation()
 {
 }
 
-sf::IntRect Animation::moveSprite(int pressedKey)
+void Animation::moveSprite(int direction)
 {
-	if (_rectOfSprite.left == 512) // 8 * 64
+	if (_rectOfSpriteInTexture.left == (_nTilesPerDirection - 1) * _tileSize.x)
 	{
-		_rectOfSprite.left = 0;
+		_rectOfSpriteInTexture.left = 0;
 	}
 	else
 	{
-		_rectOfSprite.left += 64;
+		_rectOfSpriteInTexture.left += _tileSize.x;
 	}
-	switch(pressedKey)
+
+	if (_moveDirection.left)
 	{
-		case sf::Keyboard::Up:
-		{
-			_rectOfSprite.top = 512; // 8 * 64
-			break;
-		}
-		case sf::Keyboard::Left:
-		{
-			_rectOfSprite.top = 576; // 9 * 64
-			break;
-		}
-		case sf::Keyboard::Down:
-		{
-			_rectOfSprite.top = 640; // 10 * 64
-			break;
-		}
-		case sf::Keyboard::Right:
-		{
-			_rectOfSprite.top = 704; // 11 * 64
-			break;
-		}
+		_sprite->move(direction * _spriteVelocity * sf::Vector2f(-1.f, 0.f));
+		_rectOfSpriteInTexture.top = _tileSize.y * 1;
 	}
-	return _rectOfSprite;
+	else if (_moveDirection.right)
+	{
+		_sprite->move(direction * _spriteVelocity * sf::Vector2f(1.f, 0.f));
+		_rectOfSpriteInTexture.top = _tileSize.y * 3;
+	}
+	else if (_moveDirection.up)
+	{
+		_sprite->move(direction * _spriteVelocity * sf::Vector2f(0.f, -1.f));
+		_rectOfSpriteInTexture.top = _tileSize.y * 0;
+	}
+	else if (_moveDirection.down)
+	{
+		_sprite->move(direction * _spriteVelocity * sf::Vector2f(0.f, 1.f));
+		_rectOfSpriteInTexture.top = _tileSize.y * 2;
+	}
+	else // Bewegt sich nicht
+	{
+		_rectOfSpriteInTexture.left = 0;
+	}
+	
+	_sprite->setTextureRect(_rectOfSpriteInTexture);
+	
 }
 
-void Animation::reset(std::shared_ptr<sf::Sprite> sprite)
+void Animation::setMoveDirection(bool up, bool left, bool down, bool right)
 {
-	_rectOfSprite.left = 0;
-	sprite->setTextureRect(_rectOfSprite);
+	_moveDirection.up = up;
+	_moveDirection.left = left;
+	_moveDirection.down = down;
+	_moveDirection.right = right;
 }
 
-void Animation::moveSprite(int pressedKey, std::shared_ptr<sf::Sprite> sprite)
+void Animation::setPosition(const sf::Vector2f & position)
 {
-	// Position im Sprite Sheet
-	sprite->setTextureRect(this->moveSprite(pressedKey));
+	_sprite->setPosition(position);
 }
-
-sf::IntRect Animation::getRectOfSprite()
-{
-	return _rectOfSprite;
-}
-
-//void Animation::setPosition(const sf::Vector2f & position)
-//{
-//	_sprite->setPosition(position);
-//}
