@@ -164,15 +164,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="GameLog.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="UserTypes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="GameLog.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Map.cpp" />
