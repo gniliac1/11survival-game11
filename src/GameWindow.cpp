@@ -10,15 +10,21 @@ GameWindow::GameWindow(size_t width, size_t height, cdouble frameRate, cstring w
 	// window options
 	_window->setFramerateLimit(frameRate);
 
-	// load the font for printing status messages
-	_statusFont.loadFromFile("arial.ttf");
-
 	// load the map
 	_map->load("markt.tmx");
+
+	// Load the font for printing log messages
+	_statusFont.loadFromFile("arial.ttf");
+
+	// create the GameLog instance
+	GameLog::Get()->setMaxEntries(5);
+	GameLog::Get()->createLogEntry("Starting GameLog... SUCCESS");
 }
 
 GameWindow::~GameWindow()
 {
+	// delete the GameLog instance
+	GameLog::Del();
 }
 
 void GameWindow::run()
@@ -26,15 +32,6 @@ void GameWindow::run()
 	// main loop
 	while (_window->isOpen())
 	{
-		if (_clock.getElapsedTime().asSeconds() > 5.f)
-		{
-			if (_statusMessages.size() > 0)
-			{
-				_statusMessages.pop_front();
-			}
-			_clock.restart();
-		}
-
 		manageEvents();
 
 		logic();
@@ -69,7 +66,7 @@ void GameWindow::manageEvents()
 		{
 			if (event.key.code == sf::Keyboard::Space) {
 				_interactionRequest = true;
-				addStatusMessage("You've issued an interaction ...");
+				GameLog::Get()->createLogEntry("You've issued an interaction ...");
 			}
 		}
 	}
@@ -103,7 +100,7 @@ void GameWindow::check_collisions()
 				_objectLabel = object->getName();
 				if (_interactionRequest)
 				{
-					addStatusMessage("Congrats, you bought an item!");
+					GameLog::Get()->createLogEntry("Congrats, you bought an item!", 16, sf::Color::Red, sf::Text::Bold);
 				}
 			}
 			else if (object->getParent() == "NPC" || object->getParent() == "NPC2")
@@ -111,7 +108,7 @@ void GameWindow::check_collisions()
 				_objectLabel = object->getName();
 				if (_interactionRequest)
 				{
-					addStatusMessage(std::string("Hello adventurer! My name is ") + object->getName() + std::string(". Nice to meet you."));
+					GameLog::Get()->createLogEntry(std::string("Hello adventurer! My name is ") + _objectLabel + std::string(". Nice to meet you."));
 				}
 			}
 			else
@@ -156,22 +153,12 @@ void GameWindow::showObjectLabel(std::string label)
 	_window->draw(text);
 }
 
-void GameWindow::addStatusMessage(std::string message)
-{
-	sf::Text statusMessage;
-	statusMessage.setFont(_statusFont);
-	statusMessage.setString(message);
-	statusMessage.setCharacterSize(15);
-	statusMessage.setFillColor(sf::Color::Black);
-	statusMessage.setStyle(sf::Text::Bold);
-	_statusMessages.push_back(statusMessage);
-}
-
 void GameWindow::showStatusMessages()
 {
-	for (size_t i=0; i<_statusMessages.size(); ++i)
+	const std::deque<sf::Text> logEntries = GameLog::Get()->getLogMessages();
+	for ( const sf::Text& entry : logEntries )
 	{
-		_statusMessages[i].setPosition(50, 50 + i * 25);
-		_window->draw(_statusMessages[i]);
+		_window->draw(entry);
+		std::cout << entry.getString().toAnsiString() << std::endl;
 	}
 }
