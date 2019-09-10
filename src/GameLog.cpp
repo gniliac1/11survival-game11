@@ -31,35 +31,37 @@ void GameLog::createLogEntry(const char * text)
 
 void GameLog::createLogEntry(const std::string& text, unsigned int size, const sf::Color& color, sf::Uint32 style)
 {
-	sf::Text logText;
+	/*sf::Text logText;
 	logText.setFont(_logFont);
 	logText.setString(text);
 	logText.setCharacterSize(size);
 	logText.setFillColor(color);
 	logText.setStyle(style);
-	_logMessages.push_back(logText);
+	_logMessages.push_back(logText);*/
+	_logMessages.push_back(text);
 }
 
 
 void GameLog::createLogEntry(const char * text, unsigned int size, const sf::Color & color, sf::Uint32 style)
 {
-	sf::Text logText;
+	/*sf::Text logText;
 	logText.setFont(_logFont);
 	logText.setString(text);
 	logText.setCharacterSize(size);
 	logText.setFillColor(color);
 	logText.setStyle(style);
-	_logMessages.push_back(logText);
+	_logMessages.push_back(logText);*/
+	_logMessages.push_back(text);
 }
 
 
 void GameLog::determinePositions()
 {
-	int i = 0;
+	/*int i = 0;
 	for (sf::Text& entry : _logMessages)
 	{
 		entry.setPosition(50, 50 + i++ * 25);
-	}
+	}*/
 }
 
 
@@ -76,11 +78,27 @@ void GameLog::updateLogMessages()
 }
 
 
-const std::deque<sf::Text> GameLog::getLogMessages()
+//const std::deque<sf::Text> GameLog::getLogMessages()
+const sf::Text GameLog::getLogMessages()
 {
 	updateLogMessages();
-	determinePositions();
-	return _logMessages;
+	//determinePositions();
+	std::string result;
+	int i = 0;
+	for (std::string& entry : _logMessages)
+	{
+		result += entry + std::string("\n");
+	}
+
+	sf::Text logText;
+	logText.setFont(_logFont);
+	logText.setString(result);
+	logText.setCharacterSize(_logSize);
+	logText.setFillColor(_logColor);
+	logText.setStyle(_logStyle);
+	logText.setPosition(50.0f, 50.0f);
+
+	return logText;
 }
 
 

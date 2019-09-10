@@ -17,7 +17,7 @@ GameWindow::GameWindow(size_t width, size_t height, cdouble frameRate, cstring w
 	_statusFont.loadFromFile("arial.ttf");
 
 	// create the GameLog instance
-	GameLog::Get()->setMaxEntries(5);
+	GameLog::Get()->setMaxEntries(25);
 	GameLog::Get()->createLogEntry("Starting GameLog... SUCCESS");
 }
 
@@ -155,10 +155,12 @@ void GameWindow::showObjectLabel(std::string label)
 
 void GameWindow::showStatusMessages()
 {
-	const std::deque<sf::Text> logEntries = GameLog::Get()->getLogMessages();
+	/*const std::deque<sf::Text> logEntries = GameLog::Get()->getLogMessages();
 	for ( const sf::Text& entry : logEntries )
 	{
 		_window->draw(entry);
 		std::cout << entry.getString().toAnsiString() << std::endl;
-	}
+	}*/
+
+	_window->draw(GameLog::Get()->getLogMessages());
 }

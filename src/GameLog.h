@@ -37,8 +37,8 @@ private:
 	// Font for writing log messages
 	sf::Font _logFont;
 
-	// Vector containing the log messages of the last 5 seconds
-	std::deque<sf::Text> _logMessages;
+	// Vector containing the log messages of the last _nMaxEntries seconds
+	std::deque<std::string> _logMessages;
 
 	// Size of the log messages (default: 15)
 	unsigned int _logSize;
@@ -58,7 +58,7 @@ private:
 public:
 
 	// Get list of current log messages
-	const std::deque<sf::Text> getLogMessages();
+	const sf::Text getLogMessages();
 
 	// Set a new default log color 
 	void setLogColor(const sf::Color& color);
