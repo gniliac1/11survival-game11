@@ -20,7 +20,7 @@ class GameWindow
 public:
 
 	// constructor
-	GameWindow(size_t width=1920, size_t height=1080, cdouble frameRate=60, cstring windowTitle="Survival Game");
+	GameWindow(size_t width=1920, size_t height=1080, cdouble frameRate=30, cstring windowTitle="Survival Game");
 	// destructor
 	~GameWindow();
 

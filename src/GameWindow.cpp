@@ -61,12 +61,19 @@ void GameWindow::manageEvents()
 			_window->close();
 		}
 
-		// buy items
+		
 		if (event.type == sf::Event::KeyReleased)
 		{
-			if (event.key.code == sf::Keyboard::Space) {
+			// buy items
+			if (event.key.code == sf::Keyboard::Space) 
+			{
 				_interactionRequest = true;
 				GameLog::Get()->createLogEntry("You've issued an interaction ...");
+			}
+			if (event.key.code == sf::Keyboard::Y)
+			{
+				_player->setHitting(true);
+				GameLog::Get()->createLogEntry("You've hit with your air-speer into nothing.");
 			}
 		}
 	}
@@ -76,6 +83,7 @@ void GameWindow::logic()
 {
 	_player->move();
 	check_collisions();
+	_player->hit();
 }
 
 void GameWindow::check_collisions()
