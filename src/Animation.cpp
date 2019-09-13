@@ -62,14 +62,6 @@ bool Animation::moveSprite(int direction, int moveVelocity)
 	}
 }
 
-void Animation::setMoveDirection(bool up, bool left, bool down, bool right)
-{
-	_moveDirection.up = up;
-	_moveDirection.left = left;
-	_moveDirection.down = down;
-	_moveDirection.right = right;
-}
-
 void Animation::setPosition(const sf::Vector2f & position)
 {
 	_sprite->setPosition(position);

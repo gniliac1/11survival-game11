@@ -29,7 +29,6 @@ private:
 
 public:
 
-	void setMoveDirection(bool up, bool left, bool down, bool right);
 	void setPosition(const sf::Vector2f& position);
 
 };
