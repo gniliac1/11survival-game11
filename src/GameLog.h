@@ -2,6 +2,7 @@
 
 // standard c++ header
 #include <deque> // for deque
+#include <iostream> // for cerr
 
 // sfml headers
 #include <SFML/Graphics.hpp>
@@ -28,6 +29,9 @@ public:
 
 private:
 
+	// Buffer for rendering the GameLog into a buffer, which is updated every 5s, instead of rendering each text to the screen separately
+	std::shared_ptr<sf::RenderTexture> _logBuffer;
+
 	// Clock to check whether the old log messages can be removed from the log messages queue
 	sf::Clock _logClock;
 
@@ -52,10 +56,15 @@ private:
 	// Determine the position of every log message on the screen
 	void determinePositions();
 
+	// 
+	void updateBuffer();
+
 	// Check wehther old log messages can be removed from the log messages queue and remove them eventually
 	void updateLogMessages();
 
 public:
+
+	const std::shared_ptr<sf::RenderTexture> getLogBuffer();
 
 	// Get list of current log messages
 	const sf::Text getLogMessages();

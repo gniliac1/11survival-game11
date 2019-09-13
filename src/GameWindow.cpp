@@ -170,5 +170,8 @@ void GameWindow::showStatusMessages()
 		std::cout << entry.getString().toAnsiString() << std::endl;
 	}*/
 
-	_window->draw(GameLog::Get()->getLogMessages());
+	//_window->draw(GameLog::Get()->getLogMessages());
+	sf::Sprite temp(GameLog::Get()->getLogBuffer()->getTexture());
+	temp.setPosition(50.0f, 50.0f);
+	_window->draw(temp);
 }

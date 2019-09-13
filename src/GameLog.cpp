@@ -3,10 +3,17 @@
 
 
 GameLog::GameLog()
-	: _logColor(sf::Color::Black),
+	: _logBuffer(std::make_shared<sf::RenderTexture>()),
+	_logColor(sf::Color::Black),
 	_logSize(15),
 	_logStyle(sf::Text::Regular)
 {
+	// 
+	if (!_logBuffer->create(250, 500))
+	{
+		std::cerr << "Unable to create buffer for texture" << std::endl;
+	}
+
 	// Load the font for printing log messages
 	_logFont.loadFromFile("arial.ttf");
 }
@@ -64,6 +71,31 @@ void GameLog::determinePositions()
 	}*/
 }
 
+void GameLog::updateBuffer()
+{
+	// clear the buffer
+	_logBuffer->clear(sf::Color(255,255,255,100));
+
+	// dummy variable
+	sf::Text logText;
+	int i = 0;
+	for (std::string& entry : _logMessages)
+	{
+		logText.setFont(_logFont);
+		logText.setString(entry);
+		logText.setCharacterSize(_logSize);
+		logText.setFillColor(_logColor);
+		logText.setStyle(_logStyle);
+		logText.setPosition(0.0f, i++ * 25.0f);
+
+		// draw text to the buffer
+		_logBuffer->draw(logText);
+	}
+
+	// We're done drawing to the texture
+	_logBuffer->display();
+}
+
 
 void GameLog::updateLogMessages()
 {
@@ -77,6 +109,13 @@ void GameLog::updateLogMessages()
 	}
 }
 
+
+const std::shared_ptr<sf::RenderTexture> GameLog::getLogBuffer()
+{
+	updateLogMessages();
+	updateBuffer();
+	return _logBuffer;
+}
 
 //const std::deque<sf::Text> GameLog::getLogMessages()
 const sf::Text GameLog::getLogMessages()
