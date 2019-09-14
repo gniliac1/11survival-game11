@@ -40,6 +40,10 @@ void Player::move()
 	{
 		_viewingDirection = RIGHT;
 		_animationMove->moveSprite(_viewingDirection);
+	} 
+	else
+	{
+		_animationMove->resetToFirstAnimationTexture();
 	}
 
 	_curSprite = _animationMove->getSprite();
@@ -48,7 +52,7 @@ void Player::move()
 
 void Player::resetLastMove() 
 {
-	_animationMove->moveSprite(-1);
+	_animationMove->moveSprite(_viewingDirection,-1);
 }
 
 void Player::hit()

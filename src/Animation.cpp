@@ -44,7 +44,7 @@ bool Animation::moveSprite(int direction, int moveVelocity)
 	else // Bewegt sich nicht
 	{
 		_rectOfSpriteInTexture.left = 0;
-		std::cout << "Keine Richtung in Animation::moveSprite()." << std::endl;
+		//std::cout << "Keine Richtung in Animation::moveSprite()." << std::endl;
 		return false;
 	}
 
@@ -60,6 +60,12 @@ bool Animation::moveSprite(int direction, int moveVelocity)
 		_sprite->setTextureRect(_rectOfSpriteInTexture);
 		return true;
 	}
+}
+
+void Animation::resetToFirstAnimationTexture()
+{
+	_rectOfSpriteInTexture.left = 0;
+	_sprite->setTextureRect(_rectOfSpriteInTexture);
 }
 
 void Animation::setPosition(const sf::Vector2f & position)

@@ -14,6 +14,7 @@ public:
 	~Animation();
 
 	bool moveSprite(int direction, int moveVelocity = 1); //moveVelocity is negative, if the sprite should go backwards
+	void resetToFirstAnimationTexture();
 
 private:
 
