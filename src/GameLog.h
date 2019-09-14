@@ -32,6 +32,9 @@ private:
 	// Buffer for rendering the GameLog into a buffer, which is updated every 5s, instead of rendering each text to the screen separately
 	std::shared_ptr<sf::RenderTexture> _logBuffer;
 
+	// Flage indicating whether the GameLog has changed within the last program tick
+	bool _logChanged;
+
 	// Clock to check whether the old log messages can be removed from the log messages queue
 	sf::Clock _logClock;
 
@@ -42,7 +45,7 @@ private:
 	sf::Font _logFont;
 
 	// Vector containing the log messages of the last _nMaxEntries seconds
-	std::deque<std::string> _logMessages;
+	std::deque<sf::Text> _logMessages;
 
 	// Size of the log messages (default: 15)
 	unsigned int _logSize;
@@ -53,10 +56,7 @@ private:
 	// Maximum number of entries which are allowed
 	unsigned int _nMaxEntries;
 
-	// Determine the position of every log message on the screen
-	void determinePositions();
-
-	// 
+	// Render the messages to the buffer
 	void updateBuffer();
 
 	// Check wehther old log messages can be removed from the log messages queue and remove them eventually
@@ -64,10 +64,8 @@ private:
 
 public:
 
+	// Get the buffer which contains the GameLog messages
 	const std::shared_ptr<sf::RenderTexture> getLogBuffer();
-
-	// Get list of current log messages
-	const sf::Text getLogMessages();
 
 	// Set a new default log color 
 	void setLogColor(const sf::Color& color);

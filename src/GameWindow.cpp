@@ -163,14 +163,7 @@ void GameWindow::showObjectLabel(std::string label)
 
 void GameWindow::showStatusMessages()
 {
-	/*const std::deque<sf::Text> logEntries = GameLog::Get()->getLogMessages();
-	for ( const sf::Text& entry : logEntries )
-	{
-		_window->draw(entry);
-		std::cout << entry.getString().toAnsiString() << std::endl;
-	}*/
-
-	//_window->draw(GameLog::Get()->getLogMessages());
+	// the logbuffer is a texture, so we need to create a sprite from it in order to be able to draw it
 	sf::Sprite temp(GameLog::Get()->getLogBuffer()->getTexture());
 	temp.setPosition(50.0f, 50.0f);
 	_window->draw(temp);
