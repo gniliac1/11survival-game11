@@ -8,13 +8,16 @@ class Map
 public:
 
 	// Construct a map by the path to the map files and the size of the window
-	Map(const std::string& mapPath, const sf::FloatRect& windowRect);
+	Map(const sf::FloatRect& windowRect, const std::string& mapPath = "../graphics/maps");
 
 	// Empty standard destructor
 	~Map();
 
 	// Check for collisions of the player and map objects
 	bool checkCollision(const sf::FloatRect& playerRect);
+
+	// Check for possible zone switches
+	bool checkZoneSwitch(const sf::Vector2f& playerPos);
 
 	// Returns vector containing each layer of the map
 	const std::vector<tmx::MapLayer>& getLayers() const;

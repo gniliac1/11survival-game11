@@ -2,7 +2,7 @@
 #include "Map.h"
 
 
-Map::Map(const std::string& mapPath, const sf::FloatRect& windowRect)
+Map::Map(const sf::FloatRect& windowRect, const std::string& mapPath)
 	: _map(std::make_unique<tmx::MapLoader>(mapPath)),
 	 _windowRect(windowRect)
 {
@@ -34,6 +34,16 @@ bool Map::checkCollision(const sf::FloatRect& playerRect)
 			return true;
 		}
 	}
+}
+
+bool Map::checkZoneSwitch(const sf::Vector2f & playerPos)
+{
+	// TODO:
+	// - not implemented yet
+	// - check whether the current position of the player allows for zone switches 
+	// - the possible locations of zone switches have been read in from a map 
+	// - this functionality still needs to be implemented as well
+	return false;
 }
 
 const std::vector<tmx::MapLayer>& Map::getLayers() const

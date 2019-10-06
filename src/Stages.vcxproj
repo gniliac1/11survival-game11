@@ -166,6 +166,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="GameLog.h" />
+    <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Map.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameLog.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Map.cpp" />

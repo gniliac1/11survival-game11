@@ -19,26 +19,26 @@ Animation::~Animation()
 /*
 	Moves the sprite in one direction with given speed AND choose the next texture.
 */
-bool Animation::moveSprite(int direction, int moveVelocity)
+bool Animation::moveSprite(int direction, float elapsedTime, int moveVelocity)
 {
 	if (direction == Player::Direction::LEFT)
 	{
-		_sprite->move(moveVelocity * _spriteVelocity * sf::Vector2f(-1.f, 0.f));
+		_sprite->move(moveVelocity * _spriteVelocity * elapsedTime * sf::Vector2f(-1.f, 0.f));
 		_rectOfSpriteInTexture.top = _tileSize.y * 1;
 	}
 	else if (direction == Player::Direction::RIGHT)
 	{
-		_sprite->move(moveVelocity * _spriteVelocity * sf::Vector2f(1.f, 0.f));
+		_sprite->move(moveVelocity * _spriteVelocity * elapsedTime * sf::Vector2f(1.f, 0.f));
 		_rectOfSpriteInTexture.top = _tileSize.y * 3;
 	}
 	else if (direction == Player::Direction::UP)
 	{
-		_sprite->move(moveVelocity * _spriteVelocity * sf::Vector2f(0.f, -1.f));
+		_sprite->move(moveVelocity * _spriteVelocity * elapsedTime * sf::Vector2f(0.f, -1.f));
 		_rectOfSpriteInTexture.top = _tileSize.y * 0;
 	}
 	else if (direction == Player::Direction::DOWN)
 	{
-		_sprite->move(moveVelocity * _spriteVelocity * sf::Vector2f(0.f, 1.f));
+		_sprite->move(moveVelocity * _spriteVelocity * elapsedTime * sf::Vector2f(0.f, 1.f));
 		_rectOfSpriteInTexture.top = _tileSize.y * 2;
 	}
 	else // Bewegt sich nicht

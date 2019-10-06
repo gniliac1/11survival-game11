@@ -6,7 +6,7 @@ class EventManager
 {
 public:
 
-	EventManager();
+	EventManager(const std::shared_ptr<sf::RenderWindow> gameWindow);
 	~EventManager();
 
 	void checkForEvents();

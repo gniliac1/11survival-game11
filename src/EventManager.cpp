@@ -2,10 +2,11 @@
 #include "EventManager.h"
 
 
-EventManager::EventManager()
+
+EventManager::EventManager(const std::shared_ptr<sf::RenderWindow> gameWindow)
+	: _gameWindow(gameWindow)
 {
 }
-
 
 EventManager::~EventManager()
 {

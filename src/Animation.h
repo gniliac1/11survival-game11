@@ -13,7 +13,7 @@ public:
 	Animation(std::string textureFileName, sf::IntRect hitBox, sf::Vector2f position, sf::Vector2i tileSize, int nTilesPerDirection, sf::IntRect rectOfTextureForAnimation);
 	~Animation();
 
-	bool moveSprite(int direction, int moveVelocity = 1); //moveVelocity is negative, if the sprite should go backwards
+	bool moveSprite(int direction, float elapsedTime,int moveVelocity = 1); //moveVelocity is negative, if the sprite should go backwards
 	void resetToFirstAnimationTexture();
 
 private:
